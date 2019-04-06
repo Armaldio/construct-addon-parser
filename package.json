@@ -1,0 +1,17 @@
+{
+  "name": "c2-addon-parser",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "shelljs": "^0.8.3",
+    "uuid": "^3.3.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/WebCreationClub/construct-addon-parser.git"
+  },
+  "devDependencies": {
+    "np": "^4.0.2"
+  }
+}
