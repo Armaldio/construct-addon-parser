@@ -58,12 +58,17 @@ function cf_flagsMaskToArray(flagMask) {
 }
 
 var af_deprecated = 1;
+var af_none = 2;
 
 function af_flagsMaskToArray(flagMask) {
   const flags = [
     {
       name : 'af_deprecated',
       value: af_deprecated,
+    },
+	{
+      name : 'af_none',
+      value: af_none,
     },
   ];
 
