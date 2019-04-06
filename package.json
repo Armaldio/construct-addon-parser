@@ -1,5 +1,5 @@
 {
-  "name": "c2-addon-parser",
+  "name": "construct-addon-parser",
   "version": "1.0.1",
   "main": "index.js",
   "license": "MIT",
