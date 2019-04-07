@@ -4,5 +4,6 @@
     "scope": "webcreationclub",
     "builds": [
         { "src": "**/*.js", "use": "@now/node" }
-    ]
+    ],
+    "alias": "addon-parser-armaldio.webcreationclub.now.sh"
 }
