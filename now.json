@@ -1,0 +1,8 @@
+{
+    "version": 2,
+    "name": "addon-parser",
+    "scope": "webcreationclub",
+    "builds": [
+        { "src": "**/*.js", "use": "@now/node" }
+    ]
+}
