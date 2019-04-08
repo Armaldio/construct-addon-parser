@@ -13,9 +13,13 @@ conditions.forEach(condition => {
   condition.flags = cf_flagsMaskToArray(condition.flags);
 });
 
+properties.forEach(property => {
+  property.flags = ept_flagsMaskToArray(property.flags);
+});
+
 module.exports = {
   settings,
-  properties: property_list,
+  properties,
   expressions,
   conditions,
   actions,

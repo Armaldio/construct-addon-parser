@@ -1,6 +1,7 @@
 var conditions  = [];
 var actions     = [];
 var expressions = [];
+var properties  = [];
 
 var cf_trigger                    = 1;
 var cf_none                       = 2;
@@ -58,7 +59,7 @@ function cf_flagsMaskToArray(flagMask) {
 }
 
 var af_deprecated = 1;
-var af_none = 2;
+var af_none       = 2;
 
 function af_flagsMaskToArray(flagMask) {
   const flags = [
@@ -66,7 +67,7 @@ function af_flagsMaskToArray(flagMask) {
       name : 'af_deprecated',
       value: af_deprecated,
     },
-	{
+    {
       name : 'af_none',
       value: af_none,
     },
@@ -179,6 +180,61 @@ function settings_flagsMaskToArray(flagMask) {
 
 var bf_onlyone = 'bf_onlyone';
 
+var ept_integer = 1;
+var ept_float   = 2;
+var ept_text    = 4;
+var ept_color   = 8;
+var ept_font    = 16;
+var ept_combo   = 32;
+var ept_link    = 64;
+var ept_section = 128;
+
+function ept_flagsMaskToArray(flagMask) {
+  const flags = [
+    {
+      name : 'ept_integer',
+      value: ept_integer,
+    },
+    {
+      name : 'ept_float',
+      value: ept_float,
+    },
+    {
+      name : 'ept_text',
+      value: ept_text,
+    },
+    {
+      name : 'ept_color',
+      value: ept_color,
+    },
+    {
+      name : 'ept_font',
+      value: ept_font,
+    },
+    {
+      name : 'ept_combo',
+      value: ept_combo,
+    },
+    {
+      name : 'ept_link',
+      value: ept_link,
+    },
+    {
+      name : 'ept_section',
+      value: ept_section,
+    },
+  ];
+
+  const result = [];
+
+  flags.forEach(flag => {
+    if (flagMask & flag.value) {
+      result.push(flag.name);
+    }
+  });
+  return result;
+}
+
 var params        = [];
 var combo_options = [];
 
@@ -230,7 +286,7 @@ function AddComboParam(name, description, initial) {
     description,
     initial,
     options: combo_options,
-    caller: 'AddComboParam',
+    caller : 'AddComboParam',
   });
   combo_options = [];
 }
@@ -335,6 +391,19 @@ function AddExpression(id, flags, list_name, category, expression_name, descript
   });
   params = [];
 }
+
+var Property = function (flags, key, initial_str, description) {
+  properties.push({
+    flags,
+    key,
+    initial_str,
+    description,
+  });
+};
+
+var cr = {
+  Property,
+};
 
 function ACESDone() {
 }
