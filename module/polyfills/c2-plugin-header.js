@@ -1,18 +1,18 @@
-var conditions  = [];
-var actions     = [];
-var expressions = [];
-var properties  = [];
+const conditions  = [];
+const actions     = [];
+const expressions = [];
+const properties  = [];
 
-var cf_trigger                    = 1;
-var cf_none                       = 2;
-var cf_fake_trigger               = 4;
-var cf_static                     = 8;
-var cf_not_invertible             = 16;
-var cf_deprecated                 = 32;
-var cf_incompatible_with_triggers = 64;
-var cf_looping                    = 128;
+const cf_trigger                    = 1;
+const cf_none                       = 2;
+const cf_fake_trigger               = 4;
+const cf_static                     = 8;
+const cf_not_invertible             = 16;
+const cf_deprecated                 = 32;
+const cf_incompatible_with_triggers = 64;
+const cf_looping                    = 128;
 
-function cf_flagsMaskToArray(flagMask) {
+const cf_flagsMaskToArray = (flagMask) => {
   const flags = [
     {
       name : 'cf_trigger',
@@ -56,12 +56,12 @@ function cf_flagsMaskToArray(flagMask) {
     }
   });
   return result;
-}
+};
 
-var af_deprecated = 1;
-var af_none       = 2;
+const af_deprecated = 1;
+const af_none       = 2;
 
-function af_flagsMaskToArray(flagMask) {
+const af_flagsMaskToArray = (flagMask) => {
   const flags = [
     {
       name : 'af_deprecated',
@@ -81,15 +81,15 @@ function af_flagsMaskToArray(flagMask) {
     }
   });
   return result;
-}
+};
 
-var ef_return_number       = 1;
-var ef_return_string       = 2;
-var ef_return_any          = 4;
-var ef_variadic_parameters = 8;
-var ef_deprecated          = 16;
+const ef_return_number         = 1;
+const ef_return_string         = 2;
+const ef_return_any            = 4;
+const ef_constiadic_parameters = 8;
+const ef_deprecated            = 16;
 
-function ef_flagsMaskToArray(flagMask) {
+const ef_flagsMaskToArray = (flagMask) => {
   const flags = [
     {
       name : 'ef_return_number',
@@ -104,8 +104,8 @@ function ef_flagsMaskToArray(flagMask) {
       value: ef_return_any,
     },
     {
-      name : 'ef_variadic_parameters',
-      value: ef_variadic_parameters,
+      name : 'ef_constiadic_parameters',
+      value: ef_constiadic_parameters,
     },
     {
       name : 'ef_deprecated',
@@ -121,18 +121,18 @@ function ef_flagsMaskToArray(flagMask) {
     }
   });
   return result;
-}
+};
 
-var pf_singleglobal    = 1;
-var pf_texture         = 2;
-var pf_animations      = 4;
-var pf_tiling          = 8;
-var pf_position_aces   = 16;
-var pf_size_aces       = 32;
-var pf_appearance_aces = 64;
-var pf_zorder_aces     = 128;
+const pf_singleglobal    = 1;
+const pf_texture         = 2;
+const pf_animations      = 4;
+const pf_tiling          = 8;
+const pf_position_aces   = 16;
+const pf_size_aces       = 32;
+const pf_appearance_aces = 64;
+const pf_zorder_aces     = 128;
 
-function settings_flagsMaskToArray(flagMask) {
+const settings_flagsMaskToArray = (flagMask) => {
   const flags = [
     {
       name : 'pf_singleglobal',
@@ -176,20 +176,20 @@ function settings_flagsMaskToArray(flagMask) {
     }
   });
   return result;
-}
+};
 
-var bf_onlyone = 'bf_onlyone';
+const bf_onlyone = 'bf_onlyone';
 
-var ept_integer = 1;
-var ept_float   = 2;
-var ept_text    = 4;
-var ept_color   = 8;
-var ept_font    = 16;
-var ept_combo   = 32;
-var ept_link    = 64;
-var ept_section = 128;
+const ept_integer = 1;
+const ept_float   = 2;
+const ept_text    = 4;
+const ept_color   = 8;
+const ept_font    = 16;
+const ept_combo   = 32;
+const ept_link    = 64;
+const ept_section = 128;
 
-function ept_flagsMaskToArray(flagMask) {
+const ept_flagsMaskToArray = (flagMask) => {
   const flags = [
     {
       name : 'ept_integer',
@@ -233,54 +233,54 @@ function ept_flagsMaskToArray(flagMask) {
     }
   });
   return result;
-}
+};
 
-var params        = [];
-var combo_options = [];
+let params        = [];
+let combo_options = [];
 
-function AddNumberParam(name, description, initial_str) {
+const AddNumberParam = (name, description, initial_str) => {
   params.push({
     name,
     description,
     initial_str,
     caller: 'AddNumberParam',
   });
-}
+};
 
-function AddStringParam(name, description, initial_str) {
+const AddStringParam = (name, description, initial_str) => {
   params.push({
     name,
     description,
     initial_str,
     caller: 'AddStringParam',
   });
-}
+};
 
-function AddAnyTypeParam(name, description, initial_str) {
+const AddAnyTypeParam = (name, description, initial_str) => {
   params.push({
     name,
     description,
     initial_str,
     caller: 'AddAnyTypeParam',
   });
-}
+};
 
-function AddCmpParam(name, description) {
+const AddCmpParam = (name, description) => {
   params.push({
     name,
     description,
     caller: 'AddCmpParam',
   });
-}
+};
 
-function AddComboParamOption(text) {
+const AddComboParamOption = (text) => {
   combo_options.push({
     text,
     caller: 'AddComboParamOption',
   });
-}
+};
 
-function AddComboParam(name, description, initial) {
+const AddComboParam = (name, description, initial) => {
   params.push({
     name,
     description,
@@ -289,66 +289,66 @@ function AddComboParam(name, description, initial) {
     caller : 'AddComboParam',
   });
   combo_options = [];
-}
+};
 
-function AddObjectParam(name, description) {
+const AddObjectParam = (name, description) => {
   params.push({
     name,
     description,
     caller: 'AddObjectParam',
   });
-}
+};
 
-function AddLayerParam(name, description) {
+const AddLayerParam = (name, description) => {
   params.push({
     name,
     description,
     caller: 'AddLayerParam',
   });
-}
+};
 
-function AddLayoutParam(name, description) {
+const AddLayoutParam = (name, description) => {
   params.push({
     name,
     description,
     caller: 'AddLayoutParam',
   });
-}
+};
 
-function AddKeybParam(name, description) {
+const AddKeybParam = (name, description) => {
   params.push({
     name,
     description,
     caller: 'AddKeybParam',
   });
-}
+};
 
-function AddAnimationParam(name, description, initial_str) {
+const AddAnimationParam = (name, description, initial_str) => {
   params.push({
     name,
     description,
     initial_str,
     caller: 'AddAnimationParam',
   });
-}
+};
 
-function AddAudioFileParam(name, description) {
+const AddAudioFileParam = (name, description) => {
   params.push({
     name,
     description,
     caller: 'AddAudioFileParam',
   });
-}
+};
 
-function AddVariadicParams(name, description) {
+const AddVariadicParams = (name, description) => {
   params.push({
     name,
     description,
     caller: 'AddVariadicParams',
   });
-}
+};
 
-function AddCondition(id, flags, list_name, category, display_string, description, script_name) {
+const AddCondition = (id, flags, list_name, category, display_string, description, script_name) => {
   conditions.push({
     id,
     flags,
@@ -361,9 +361,9 @@ function AddCondition(id, flags, list_name, category, display_string, descriptio
     caller: 'AddCondition',
   });
   params = [];
-}
+};
 
-function AddAction(id, flags, list_name, category, display_string, description, script_name) {
+const AddAction = (id, flags, list_name, category, display_string, description, script_name) => {
   actions.push({
     id,
     flags,
@@ -376,9 +376,9 @@ function AddAction(id, flags, list_name, category, display_string, description, 
     caller: 'AddAction',
   });
   params = [];
-}
+};
 
-function AddExpression(id, flags, list_name, category, expression_name, description) {
+const AddExpression = (id, flags, list_name, category, expression_name, description) => {
   expressions.push({
     id,
     flags,
@@ -390,24 +390,27 @@ function AddExpression(id, flags, list_name, category, expression_name, descript
     caller: 'AddExpression',
   });
   params = [];
-}
-
-var Property = function (flags, key, initial_str, description) {
-  properties.push({
-    flags,
-    key,
-    initial_str,
-    description,
-  });
 };
 
-var cr = {
-  Property,
+const Property = class {
+  constructor(flags, key, initial_str, description, param, readonly) {
+    properties.push({
+      flags,
+      key,
+      initial_str,
+      description,
+      params: param ? param.split('|') : [],
+      readonly,
+    });
+  }
 };
 
-function ACESDone() {
-}
+const cr    = {};
+cr.Property = Property;
 
-function assert2() {
+const ACESDone = () => {
+};
+
+const assert2 = () => {
   return false;
 };

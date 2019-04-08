@@ -22,6 +22,11 @@ app.get('*', (req, res) => {
 
 app.post('/parse/c2', upload.single('file'), (req, res) => {
   console.log(req.file);
+  if (!req.file) {
+    res.json({
+      error: 'No file provided',
+    });
+  }
 
   try {
     const plugin = parser(req.file.path);

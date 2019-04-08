@@ -1,4 +1,4 @@
-var settings   = GetPluginSettings();
+const settings   = GetPluginSettings();
 settings.flags = settings_flagsMaskToArray(settings.flags);
 
 expressions.forEach(expression => {
