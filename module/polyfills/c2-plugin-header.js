@@ -88,6 +88,7 @@ const ef_return_string         = 2;
 const ef_return_any            = 4;
 const ef_constiadic_parameters = 8;
 const ef_deprecated            = 16;
+const ef_variadic_parameters = 32;
 
 const ef_flagsMaskToArray = (flagMask) => {
   const flags = [
@@ -110,6 +111,10 @@ const ef_flagsMaskToArray = (flagMask) => {
     {
       name : 'ef_deprecated',
       value: ef_deprecated,
+    },
+    {
+      name : 'ef_variadic_parameters',
+      value: ef_variadic_parameters,
     },
   ];
 

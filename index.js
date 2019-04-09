@@ -4,7 +4,7 @@ const multer  = require('multer');
 const uuid    = require('uuid/v4');
 const os      = require('os');
 const path    = require('path');
-const parser  = require('./module');
+const { c2 }  = require('./module');
 
 const app = express();
 
