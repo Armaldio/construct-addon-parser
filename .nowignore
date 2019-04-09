@@ -2,6 +2,3 @@ node_modules
 module/examples
 .idea
 examples
-module/c3.js
-module/polyfills/c3-plugin-header.js
-module/polyfills/c3-plugin-footer.js
