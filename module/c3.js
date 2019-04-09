@@ -20,7 +20,6 @@ const cli = (filePath) => {
     let _conditions = addon[ entry ].conditions;
     if (!_conditions || _conditions.length === 0) return;
     _conditions.map(c => c.category = entry);
-    console.log(_conditions);
     conditions.push(..._conditions);
   });
 
@@ -45,13 +44,13 @@ const cli = (filePath) => {
   const footer   = fs.readFileSync(path.join(__dirname, 'polyfills', 'c3-plugin-footer.js'));
 
   let pluginjs = fs.readFileSync(path.join(root, 'plugin.js'), 'utf8');
+  pluginjs = pluginjs.replace('"use strict";', '');
   pluginjs = `${header}
   ${pluginjs}
   ${footer}`;
-  console.log(pluginjs);
   const pluginJsModule = moduleFromString(pluginjs);
 
-  console.log(pluginJsModule());
+  console.log(pluginJsModule);
 
 
 

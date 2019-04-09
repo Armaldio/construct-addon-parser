@@ -1,4 +1,18 @@
-const settings   = GetPluginSettings();
+let settings = {};
+try {
+  settings = GetPluginSettings();
+  settings.type = 'plugin'
+} catch (e) {
+  console.log('Not a plugin');
+}
+
+try {
+  settings = GetBehaviorSettings();
+  settings.type = 'behavior'
+} catch (e) {
+  console.log('Not a plugin');
+}
+
 settings.flags = settings_flagsMaskToArray(settings.flags);
 
 expressions.forEach(expression => {
