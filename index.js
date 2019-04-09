@@ -4,11 +4,14 @@ const multer  = require('multer');
 const uuid    = require('uuid/v4');
 const os      = require('os');
 const path    = require('path');
-const { c2 }  = require('./module');
+const shelljs = require('shelljs');
+const { c2, c3 }  = require('./module');
 
 const app = express();
 
-const upload = multer({ dest: path.join(os.tmpdir(), uuid()) });
+const root = path.join(os.tmpdir(), uuid());
+shelljs.mkdir('-p', root);
+const upload = multer({ dest: root });
 
 app.use(helmet());
 
@@ -20,7 +23,7 @@ app.get('*', (req, res) => {
     `);
 });
 
-app.post('/parse/c2', upload.single('file'), (req, res) => {
+app.post('/parse/c2', upload.single('file'), async (req, res) => {
   console.log(req.file);
   if (!req.file) {
     res.json({
@@ -29,7 +32,26 @@ app.post('/parse/c2', upload.single('file'), (req, res) => {
   }
 
   try {
-    const plugin = c2(req.file.path);
+    const plugin = await c2(req.file.path, req.file);
+    res.json(plugin);
+  } catch (err) {
+    console.log(err);
+    res.json({
+      err: err.message,
+    });
+  }
+});
+
+app.post('/parse/c3', upload.single('file'), async (req, res) => {
+  if (!req.file) {
+    res.json({
+      error: 'No file provided',
+    });
+  }
+
+  try {
+    const plugin = await c3(req.file.path);
+    // console.log(plugin);
     res.json(plugin);
   } catch (err) {
     console.log(err);

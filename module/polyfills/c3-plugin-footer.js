@@ -1,1 +1,2 @@
-module.exports = plugin;
+plugin();
+module.exports = pluginClass;

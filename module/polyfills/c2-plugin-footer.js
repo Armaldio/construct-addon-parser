@@ -10,7 +10,7 @@ try {
   settings = GetBehaviorSettings();
   settings.type = 'behavior'
 } catch (e) {
-  console.log('Not a plugin');
+  console.log('Not a behavior');
 }
 
 settings.flags = settings_flagsMaskToArray(settings.flags);

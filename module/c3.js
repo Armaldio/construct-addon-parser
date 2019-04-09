@@ -1,17 +1,26 @@
-const fs      = require('fs');
-const path    = require('path');
-const shelljs = require('shelljs');
-const os      = require('os');
-const uuid    = require('uuid/v4');
+const fs               = require('fs');
+const path             = require('path');
+const shelljs          = require('shelljs');
+const os               = require('os');
+const uuid             = require('uuid/v4');
 const moduleFromString = require('require-from-string');
-
-const root = 'C:\\Users\\armal\\Documents\\Projets\\construct-addon-parser\\examples\\c3\\javascript';
+const { extract }      = require('./utils');
 
 /**
  *
  * @param {string} filePath edittime.js path
  */
-const cli = (filePath) => {
+module.exports = async (filePath) => {
+  const root = path.dirname(filePath);
+  shelljs.mkdir('-p', root);
+
+  try {
+    await extract(filePath, root);
+  } catch (e) {
+    console.log(e);
+    return;
+  }
+
   // aces.json ///
   const addon = require(path.join(root, 'aces.json'));
 
@@ -40,26 +49,30 @@ const cli = (filePath) => {
   });
 
   // plugin.js ///
-  const header   = fs.readFileSync(path.join(__dirname, 'polyfills', 'c3-plugin-header.js'));
-  const footer   = fs.readFileSync(path.join(__dirname, 'polyfills', 'c3-plugin-footer.js'));
+  const header = fs.readFileSync(path.join(__dirname, 'polyfills', 'c3-plugin-header.js'));
+  const footer = fs.readFileSync(path.join(__dirname, 'polyfills', 'c3-plugin-footer.js'));
 
-  let pluginjs = fs.readFileSync(path.join(root, 'plugin.js'), 'utf8');
-  pluginjs = pluginjs.replace('"use strict";', '');
-  pluginjs = `${header}
+  let pluginjs         = fs.readFileSync(path.join(root, 'plugin.js'), 'utf8');
+  pluginjs             = pluginjs.replace('"use strict";', '');
+  pluginjs             = `${header}
   ${pluginjs}
   ${footer}`;
   const pluginJsModule = moduleFromString(pluginjs);
 
-  console.log(pluginJsModule);
+  // console.log('module', JSON.stringify(pluginJsModule.settings, null, '  '));
 
+  const settings   = pluginJsModule.settings;
+  const properties = pluginJsModule.settings.properties;
 
+  delete pluginJsModule.settings.properties;
+
+  shelljs.rm('-rf', root);
 
   return {
+    settings,
     expressions,
     conditions,
     actions,
+    properties,
   };
 };
-
-cli();
-// console.log(cli());
