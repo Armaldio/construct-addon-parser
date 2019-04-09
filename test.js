@@ -1,5 +1,5 @@
-const c2 = require('./index');
+const app = require('./index');
 
-c2.listen(3000, () => {
+app.listen(3000, () => {
   console.log('Server listening...');
 });

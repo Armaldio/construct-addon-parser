@@ -1,7 +1,7 @@
-import c2 from './c2';
-import c3 from './c3';
+const c2 = require('./c2');
+// const c3 = require('./c3');
 
 module.exports = {
   c2,
-  c3,
+  // c3,
 };

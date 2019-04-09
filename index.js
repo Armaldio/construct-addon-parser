@@ -29,7 +29,7 @@ app.post('/parse/c2', upload.single('file'), (req, res) => {
   }
 
   try {
-    const plugin = parser(req.file.path);
+    const plugin = c2(req.file.path);
     res.json(plugin);
   } catch (err) {
     console.log(err);
