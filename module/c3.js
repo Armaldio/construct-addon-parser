@@ -11,8 +11,7 @@ const { extract }      = require('./utils');
  * @param {string} filePath edittime.js path
  */
 module.exports = async (filePath) => {
-  const root = path.dirname(filePath);
-  shelljs.mkdir('-p', root);
+  const root = path.join(path.dirname(filePath), uuid());
 
   try {
     await extract(filePath, root);
@@ -67,6 +66,7 @@ module.exports = async (filePath) => {
   delete pluginJsModule.settings.properties;
 
   shelljs.rm('-rf', root);
+  shelljs.rm(filePath);
 
   return {
     settings,

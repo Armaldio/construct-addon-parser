@@ -12,12 +12,14 @@ const { extract, find }      = require('./utils');
  * @param metadata
  */
 module.exports = async (filePath, metadata) => {
-  const root      = path.dirname(filePath);
+
+  const root = path.join(path.dirname(filePath), uuid());
+
   let file = filePath;
   const isC2Addon = metadata.mimetype === 'application/octet-stream' && path.extname(metadata.originalname) === '.c2addon';
   if (isC2Addon) {
     console.log('isAddon', isC2Addon);
-    shelljs.mkdir('-p', root);
+    // shelljs.mkdir('-p', root);
 
     try {
       await extract(filePath, root);
@@ -47,6 +49,7 @@ ${footer}`;
   if (isC2Addon) {
     shelljs.rm('-rf', root);
   }
+  shelljs.rm(filePath);
 
   return plugin;
 };
