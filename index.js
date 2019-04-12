@@ -23,7 +23,7 @@ app.get('*', (req, res) => {
 });
 
 app.post('/parse/c2', upload.single('file'), async (req, res) => {
-  console.log('req.file', req.file);
+  console.log('file', req.file);
   if (!req.file) {
     res.json({
       error: 'No file provided',
@@ -42,7 +42,7 @@ app.post('/parse/c2', upload.single('file'), async (req, res) => {
 });
 
 app.post('/parse/c3', upload.single('file'), async (req, res) => {
-  console.log('req.file', req.file);
+  console.log('file', req.file);
   if (!req.file) {
     res.json({
       error: 'No file provided',
